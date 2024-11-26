@@ -1,0 +1,28 @@
+
+<div class="finance-container">
+  <h2>Personal Finance Tracker</h2>
+
+  <div class="transaction-form">
+    <input type="number" [(ngModel)]="newAmount" placeholder="Amount">
+    <input type="text" [(ngModel)]="newDescription" placeholder="Description">
+
+    <select [(ngModel)]="newType">
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+
+    <button (click)="addTransaction()">Add Transaction</button>
+  </div>
+
+  <h3>Balance: {{ balance | currency }}</h3>
+
+  <ul>
+    <li *ngFor="let transaction of transactions">
+      <span [class.income]="transaction.type === 'income'" [class.expense]="transaction.type === 'expense'">
+        {{ transaction.type | titlecase }}: {{ transaction.amount | currency }} - {{ transaction.description }} ({{ transaction.date }})
+      </span>
+      <button (click)="deleteTransaction(transaction)">Delete</button>
+    </li>
+  </ul>
+</div>
+
